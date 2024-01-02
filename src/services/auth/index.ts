@@ -16,7 +16,7 @@ export const auth = lucia({
 	},
 	middleware: elysia(),
 	adapter: mysql2(mysqlPool, {
-		user: "user",
+		user: "auth_user",
 		session: "user_session",
 		key: "user_key",
 	}),

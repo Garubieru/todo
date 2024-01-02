@@ -1,6 +1,6 @@
 import { bigint, mysqlTable, varchar } from "drizzle-orm/mysql-core";
 
-export const user = mysqlTable("user", {
+export const user = mysqlTable("auth_user", {
 	id: varchar("id", {
 		length: 15,
 	}).primaryKey(),
