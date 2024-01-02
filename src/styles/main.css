@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .main-card {
+    @apply flex flex-col items-center gap-3 p-6 bg-white rounded-md w-full md:w-[32rem] shadow-md;
+  }
+
+  .input-wrapper {
+    @apply relative flex flex-col;
+  }
+
+  .input-wrapper__label {
+    @apply absolute top-1/2 left-3 text-gray-400;
+    transform: translateY(-50%);
+    user-select: none;
+    cursor: text;
+    transition: font-size 200ms ease-in-out, top 200ms ease-in-out,
+      left 200ms ease-in-out, color 300ms ease-in-out;
+  }
+
+  .input-wrapper__input {
+    @apply border border-black rounded-md px-3 py-2 text-left;
+  }
+
+  .input-wrapper:has(.input-wrapper__input:focus) .input-wrapper__label,
+  .input-wrapper:has(.input-wrapper__input:not(:placeholder-shown))
+    .input-wrapper__label,
+  .input-wrapper:has(.input-wrapper__error:not(:empty)) .input-wrapper__label {
+    @apply text-[12px] top-[-10px] text-black left-0;
+  }
+
+  .input-wrapper:has(.input-wrapper__error:not(:empty)) .input-wrapper__label {
+    @apply text-red-500;
+  }
+
+  .input-wrapper:has(.input-wrapper__error:not(:empty)) .input-wrapper__input {
+    @apply border-red-500;
+  }
+
+  .input-wrapper__error {
+    @apply text-red-500 text-[12px];
+  }
+
+  .input-wrapper__input::placeholder {
+    display: none;
+    color: transparent;
+  }
+
+  .input-wrapper__input::-webkit-input-placeholder {
+    color: transparent;
+  }
+
+  .input-wrapper__input:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: transparent;
+  }
+
+  .input-wrapper__input::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: transparent;
+  }
+
+  .input-wrapper__input:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    color: transparent;
+  }
+
+  .icon-eye {
+    @apply icon-[iconoir--eye-solid];
+  }
+
+  .icon-eye-slash {
+    @apply icon-[ph--eye-slash];
+  }
+
+  .anchor {
+    @apply text-sky-600 font-semibold underline;
+  }
+}

@@ -1,0 +1,21 @@
+version: '3.8'
+
+volumes:
+  todo-database:
+
+
+services:
+  todo-database:
+    image: mariadb:latest
+    container_name: todo-database
+    ports:
+      - 3307:3306
+    volumes:
+      - todo-database:/var/lib/mysql
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: todo
+      MARIADB_USER: todo
+      MARIADB_PASSWORD: qwerty
+    expose:
+      - 3307
