@@ -78,4 +78,8 @@
   .anchor {
     @apply text-sky-600 font-semibold underline;
   }
+
+  .primary-btn {
+    @apply w-auto bg-black rounded-md text-white p-2 disabled:cursor-not-allowed disabled:bg-slate-600 disabled:text-gray-300;
+  }
 }

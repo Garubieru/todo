@@ -1,9 +1,10 @@
 import { context } from "@/context";
+import { Input } from "@/pages/components/input";
 import { Layout } from "@/pages/layout";
 import { Html } from "@elysiajs/html";
 import Elysia from "elysia";
 
-export const signup = new Elysia().use(context).get("/signup", () => {
+export const signup = new Elysia().use(context).get("/sign-up", () => {
 	return (
 		<Layout
 			title="Signup"
@@ -45,7 +46,14 @@ export const signup = new Elysia().use(context).get("/signup", () => {
 				<form
 					class="flex flex-col gap-5"
 					autocomplete="off"
+					hx-swap="innerHTML"
 					hx-post="/api/auth/sign-up"
+					hx-target-400="#username-error"
+					hx-ext="response-targets"
+					_="on htmx:afterRequest(detail)
+							if detail.xhr.status is 400
+								add @disabled to #submit-btn
+							end"
 				>
 					<h1 class="text-3xl font-bold">SignUp</h1>
 					<Input
@@ -87,17 +95,7 @@ export const signup = new Elysia().use(context).get("/signup", () => {
 								"
 						/>
 					</Input>
-
-					<button
-						type="submit"
-						id="submit-btn"
-						class="w-auto bg-black rounded-md text-white p-2 disabled:cursor-not-allowed disabled:bg-slate-600 disabled:text-gray-300"
-						disabled
-						_="on click call Swal.fire({  title: 'Error!',
-						text: 'Do you want to continue',
-						icon: 'error',
-						confirmButtonText: 'Cool'})"
-					>
+					<button type="submit" id="submit-btn" class="primary-btn" disabled>
 						Submit
 					</button>
 				</form>
@@ -108,34 +106,3 @@ export const signup = new Elysia().use(context).get("/signup", () => {
 		</Layout>
 	);
 });
-
-type InputProps = {
-	name: string;
-	id: string;
-	label: string;
-	placeholder: string;
-	type?: string;
-	script?: string;
-};
-
-function Input(props: Html.PropsWithChildren<InputProps>): JSX.Element {
-	return (
-		<div class="input-wrapper">
-			<label for={props.id} class="input-wrapper__label">
-				{props.placeholder}
-			</label>
-			<input
-				class="input-wrapper__input"
-				name={props.name}
-				id={props.id}
-				placeholder={props.placeholder}
-				type={props.type}
-				_={props?.script}
-			/>
-			<small class="input-wrapper__error" id={`${props.id}-error`}>
-				{""}
-			</small>
-			{props?.children}
-		</div>
-	);
-}

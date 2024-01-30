@@ -23,6 +23,7 @@ export function Layout(
 					/>
 					<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" />
 					<script src="https://unpkg.com/hyperscript.org@0.9.12" />
+					<script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js" />
 					<link rel="stylesheet" href="/public/dist/output.css" />
 					{enviroment.NODE_ENV === "development" && (
 						<script>{hotReload()}</script>
